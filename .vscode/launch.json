@@ -1,0 +1,23 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+      {
+          "type": "android",
+          "request": "launch",
+          "name": "Debug",
+          "preLaunchTask": "Debug",
+          "appSrcRoot": "${workspaceRoot}/src/main",
+          "apkFile": "${workspaceRoot}/build/outputs/apk/debug/gradle-debug.apk",
+          "adbPort": 5037
+      },
+      {
+        "type": "android",
+        "request": "launch",
+        "name": "Release",
+        "preLaunchTask": "Release",
+        "appSrcRoot": "${workspaceRoot}/src/main",
+        "apkFile": "${workspaceRoot}/build/outputs/apk/release/gradle-release.apk",
+        "adbPort": 5037
+    }
+  ]
+}

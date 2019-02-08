@@ -1,0 +1,66 @@
+buildscript {
+  repositories {
+    google()
+    jcenter()
+  }
+
+  dependencies {
+    classpath "com.android.tools.build:gradle:3.3.1"
+  }
+}
+
+allprojects {
+  repositories {
+    google()
+    jcenter()
+  }
+}
+
+apply plugin: "com.android.application"
+
+def keystoreProperties = new Properties()
+def keystorePropertiesFile = rootProject.file("C:/Workspace/android.txt")
+if (keystorePropertiesFile.exists()) {
+  keystoreProperties.load(new FileInputStream(keystorePropertiesFile))
+}
+
+project.buildDir = "build"
+
+android {
+  compileSdkVersion 28
+  buildToolsVersion "28.0.3"
+
+  defaultConfig {
+    applicationId "de.xnetsystems.main"
+    minSdkVersion 21
+    targetSdkVersion 27
+    versionName "1.0"
+    versionCode 1
+  }
+
+  signingConfigs {
+    release {
+      keyAlias keystoreProperties["keyAlias"]
+      keyPassword keystoreProperties["keyPassword"]
+      storeFile file(keystoreProperties["storeFile"])
+      storePassword keystoreProperties["storePassword"]
+    }
+  }
+
+  buildTypes {
+    release {
+      minifyEnabled true
+      signingConfig signingConfigs.release
+    }
+  }
+
+  packagingOptions {
+    exclude "META-INF/DEPENDENCIES"
+  }
+}
+
+dependencies {
+  //implementation fileTree(include: ["*.jar"], dir: "libs")
+  compile "com.android.support:appcompat-v7:28.0.0"
+  compile "com.android.support:design:28.0.0"
+}
